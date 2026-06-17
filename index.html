@@ -74,6 +74,54 @@
     <section id="publications" style="background: f8f9fa">
         <div class="publications-container">
             <h2>Publications</h2>
+
+
+            <div class="publications-list">
+                {% for pub in site.data.publications %}
+                <div class="publication">
+                    
+                    <div class="publication-image">
+                    {% if pub.image and pub.image != "" %}
+                        <img src="{{ pub.image }}" alt="{{ pub.title }}">
+                    {% else %}
+                        <i class="fa-solid fa-image publication-image-placeholder"></i>
+                    {% endif %}
+                    </div>
+
+                    <div class="publication-content">
+                    <div class="publication-header">
+                        <div class="publication-title">
+                        <h3>{{ pub.title }}</h3>
+                        </div>
+                        
+                        {% if pub.award %}
+                        <span class="award-badge">
+                        <i class="fa-solid fa-award"></i> 
+                        <i class="fa-solid fa-trophy"></i>
+                        {{ pub.award_text | default: "Award" }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <p class="authors">
+                        {{ pub.authors | markdownify | remove: '<p>' | remove: '</p>' }}
+                    </p>
+
+                    <span class="venue">{{ pub.venue }}, {{ pub.year }}</span>
+                    
+                    <div class="publication-links">
+                        {% for link in pub.links %}
+                        <a href="{{ link.url }}" target="_blank">
+                        <i class="{{ link.icon }}"></i>
+                        <span>{{ link.name }}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    </div> 
+
+                </div>
+                {% endfor %}
+            </div>
             
         <!-- Example with award badge and all links -->
             <!-- <div class="publication">
